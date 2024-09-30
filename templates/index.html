@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Form</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive.css') }}">
+    
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type=text/javascript>
+        
+                $(function() {
+        $('#upload-file-btn').click(function() {
+                var form_data = new FormData($('#contact')[0]);
+                $.ajax({
+                type: 'POST',
+                url: '/image_gatway',
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                        //alert(data);
+                        document.getElementById('contact_name').value=data[0];
+                        document.getElementById('contact_Gender').value=data[1];
+                        document.getElementById('contact_Aadhar no').value=data[2];
+                        document.getElementById('contact_Mobile no').value=data[3];
+                        document.getElementById('contact_dob').value=data[4];
+                        document.getElementById('address').value=data[5];
+                        
+                    },
+                });
+            });
+        });
+        </script>
+
+    </head>
+    <body background>
+        <section class="iq-form pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 iq-mtb-15">
+                        <h3 class="text-center mb-5">Smart_KYC</h3>
+                        <form id="contact" method="post" enctype="multipart/form-data">
+                            <div class="contact-form">
+                                <div class="section-field mb-4 ">
+                                    Front Side: <input type="file" name="file" class="form-control-file mb-0" id="exampleFormControlFile1"><br>
+                                    Back Side: <input type="file" name="file1" class="form-control-file mb-0" id="exampleFormControlFile2"><br>
+                                    <a href="#" id ="upload-file-btn" class="button float-right">Test</a>
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">Name:</label>
+                                    <input class="require" id="contact_name" type="text" placeholder="" name="name">
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">Gender:</label>
+                                    <input class="require" id="contact_Gender" type="email" placeholder="" name="Gender">
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">DOB:</label>
+                                    <input class="require" id="contact_dob" type="email" placeholder="" name="dob">
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">Aadhar no.:</label>
+                                    <input class="require" id="contact_Aadhar no" type="text" placeholder="" name="Aadhar no">
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">Mobile no:   </label>
+                                    <input class="require" id="contact_Mobile no" type="text" placeholder="" name="Mobile no">
+                                </div>
+                                <div class="section-field mt-2">
+                                    <label for="formGroupExampleInput">Full Address:   </label>
+                                    <input class="require" id="address" type="text" placeholder="" name="address">
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="js/jquery-3.3.1.min.js" ></script>
+        <!-- popper  -->
+        <script src="js/popper.min.js"></script>
+        <!--  bootstrap -->
+        <script src="js/bootstrap.min.js" ></script>
+    </body>
+</html>
